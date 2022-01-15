@@ -508,7 +508,7 @@ Split.propTypes = {
     passProps: PropTypes.bool,
     gutterSize: PropTypes.string,
     gutterStyle: PropTypes.object,
-    gutterRemder: PropTypes.func,
+    gutterRender: PropTypes.func,
     primaryIndex: PropTypes.number,
     collapsedSize: PropTypes.oneOfType([
         PropTypes.number,
