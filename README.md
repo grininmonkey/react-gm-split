@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-npm install --save react-gm-split
+Work In Progress: Not Ready Yet...
 ```
 
 ## Usage
