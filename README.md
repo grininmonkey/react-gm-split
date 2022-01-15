@@ -10,6 +10,13 @@
 Work In Progress: Not Ready Yet...
 ```
 
+## Or
+
+Download the raw src/index.js file from this repo and save it within your existing project (rename and/or modify it) and then import it... 
+```jsx
+import Split from '<path to saved file>'
+```
+
 ## Usage
 
 ```jsx
