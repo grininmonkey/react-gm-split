@@ -1,7 +1,7 @@
 {
   "name": "react-gm-split",
   "version": "1.0.0",
-  "description": "Made with create-react-library",
+  "description": "Basic split component using CSS grid",
   "author": "grininmonkey",
   "license": "MIT",
   "repository": "grininmonkey/react-gm-split",
