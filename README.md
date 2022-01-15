@@ -2,6 +2,8 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gm-split.svg)](https://www.npmjs.com/package/react-gm-split) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+> Work in Progress, I am copying my personal split component I have used within my CRA-Templates for some time and making "Yet Another" public split component... because, why not ;-)
+
 ## Install
 
 ```bash
@@ -43,7 +45,7 @@ export default function MyComponent(props) {
 
 ### `Size` related properties
 
-The component works by calculating and setting percentage for Left|Right or Top|Bottom gridTemplate
+The component works by calculating and setting percentage for Left|Right or Top|Bottom `gridTemplate`
 css property.
 
 `gutterSize` is treated as pixels.
