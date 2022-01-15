@@ -59,6 +59,19 @@ css property.
 
 The primary `Size` related properties are treated as pixels unless the value passed is a string that contains `%`.
 
+### passProps
+
+When set to `{true}` an additional object named `splitProps` is passed to the children of `Split` which contains the state props and some additional methods of the `Split` container. 
+
+- `dispatch( string )`
+  - collapse
+  - restore
+  - hidePrimary
+  - hideSecondary
+- `getSessionData()`
+- `getParentClientRect()`
+- `getGridTemplateStyle()`
+
 ## Key Behaviors
 
 - If the children count is something other than 2 it simply returns/renders the children directly without wrapping the children as a `split`.
