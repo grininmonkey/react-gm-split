@@ -126,12 +126,19 @@ const gridTemplateStyleObject = (state, array) => {
 const gridTemplateStyle = (state, primary, gutter, hideChild) => {
 
     const primaryStyleIndex = state.primaryIndex === 1 ? 2 : 0
-
+    //---------------------------------------------------------------
+    //  Set the gridTemplate style property hiding gutter and
+    //  target child by setting each to 0px and the non target
+    //  to full.
+    //---------------------------------------------------------------
     if ( hideChild ) {
         const hideIndex = hideChild === str.secondary
             ? primaryStyleIndex === 0 ? 2 : 0
             : primaryStyleIndex === 0 ? 0 : 2
-
+        //-----------------------------------------------------------
+        //  Return result as gridTemplate<Rows|Columns> property 
+        //  string.
+        //-----------------------------------------------------------
         return gridTemplateStyleObject(state,
             [
                 hideIndex === 0 ? str.gridNone : str.gridAuto,
@@ -140,10 +147,16 @@ const gridTemplateStyle = (state, primary, gutter, hideChild) => {
             ]
         )
     }
-
+    //---------------------------------------------------------------
+    //  Calculate size (percentage) of secondary child based on
+    //  primary's percentage
+    //---------------------------------------------------------------
     const secondary = primary.toLowerCase().includes(str.gridUnit)
         ? (1 - parseFloat(primary)) + str.gridUnit : str.gridAuto
-
+    //---------------------------------------------------------------
+    //  Return result as gridTemplate<Rows|Columns> property 
+    //  string.
+    //---------------------------------------------------------------
     return gridTemplateStyleObject(state,
         [
             primaryStyleIndex === 0 ? primary : secondary,
@@ -157,7 +170,9 @@ const gridTemplateStyle = (state, primary, gutter, hideChild) => {
 const gridTemplateUpdate = (state, newPrimary, newGridTemplateStyle, gutter) => {
 
     const styleKey = gridTemplateStyleKey(state)
-
+    //---------------------------------------------------------------
+    //  Get updated gridTemplateStyle or use the one passed.
+    //---------------------------------------------------------------
     if (newPrimary) {
         state.gridTemplateStyle = gridTemplateStyle(
             state,
@@ -167,7 +182,9 @@ const gridTemplateUpdate = (state, newPrimary, newGridTemplateStyle, gutter) => 
     } else if (newGridTemplateStyle) {
         state.gridTemplateStyle = newGridTemplateStyle
     }
-
+    //---------------------------------------------------------------
+    //  Update the DOM element style property
+    //---------------------------------------------------------------
     state.parentRef.current.style[styleKey] = state.gridTemplateStyle
 
 }
@@ -177,6 +194,10 @@ const gridTemplateUpdate = (state, newPrimary, newGridTemplateStyle, gutter) => 
 
 ******************************************************************************************/
 const actionCollapse = (state) => {
+    //---------------------------------------------------------------
+    //  Set SessionData and then update gridTemplate with 
+    //  collapsedSize as new primary size and gutterSize as none
+    //---------------------------------------------------------------
     if (!getSessionData(state).collapsed) {
         updateSessionData(
             state, {
@@ -192,7 +213,10 @@ const actionCollapse = (state) => {
 }
 
 const actionHide = (state, child) => {
-
+    //---------------------------------------------------------------
+    //  Set SessionData and then update gridTemplate with
+    //  0 sized target and gutter sections
+    //---------------------------------------------------------------
     if (!getSessionData(state)[str.hidden+child]) {
         updateSessionData(
             state, {
@@ -210,7 +234,10 @@ const actionHide = (state, child) => {
 }
 
 const actionRestore = (state) => {
-
+    //---------------------------------------------------------------
+    //  Update gridTemplate with stored session of last snapshot
+    //  when all sections have values.
+    //---------------------------------------------------------------
     const session = getSessionData(state)
 
     if (
@@ -235,7 +262,9 @@ const actionRestore = (state) => {
 }
 
 const splitAction = (state, action) => {
-
+    //---------------------------------------------------------------
+    //  Route action to corresponding method.
+    //---------------------------------------------------------------
     switch (action) {
         case "collapse":
             return actionCollapse(state);
@@ -341,13 +370,19 @@ const setToRender = (state, setState) => {
 
 ******************************************************************************************/
 const inBounds = (state, primary, percent, parent) => {
-
+    //---------------------------------------------------------------
+    //  If value is less than 1 then it should represent a
+    //  percent value.
+    //---------------------------------------------------------------
     const check = against => {
         if (against < 1)
             return percent
         return primary
     }
-
+    //---------------------------------------------------------------
+    //  Use and array of conditions and test for any result
+    //  equal to true.
+    //---------------------------------------------------------------
     return ![
         check(state.primaryMinSize) < state.primaryMinSize || false,
         check(state.primaryMaxSize) > state.primaryMaxSize || false,
@@ -366,11 +401,16 @@ const Gutter = ({ state }) => {
         splitter: state.parentRef.current,
         primaryChildIndex: state.primaryIndex === 1 ? 2 : 0
     }
-
+    //---------------------------------------------------------------
+    //  Use state for capturing initial values and indication
+    //  element is being dragged/moved.
+    //---------------------------------------------------------------
     const [gutter, setGutter] = React.useState({
         dragging: false
     })
-
+    //---------------------------------------------------------------
+    //  Capture pointer and save start position and primary size
+    //---------------------------------------------------------------
     const onPointerDown = event => {
         if (!getSessionData(state).collapsed) {
             event.currentTarget.setPointerCapture(event.pointerId);
@@ -383,7 +423,10 @@ const Gutter = ({ state }) => {
             })
         }
     }
-
+    //---------------------------------------------------------------
+    //  As pointer moves calculate new primary size and check
+    //  if inBounds.
+    //---------------------------------------------------------------
     const onPointerMove = event => {
         if (event.currentTarget.hasPointerCapture(event.pointerId)) {
           const position = event[config.axis.pointer]
@@ -394,7 +437,9 @@ const Gutter = ({ state }) => {
             gridTemplateUpdate(state, newPercent + str.gridUnit)
         }
       }
-
+    //---------------------------------------------------------------
+    //  Stop capturing pointer
+    //---------------------------------------------------------------
     const onPointerUp = event => {
         event.currentTarget.releasePointerCapture(event.pointerId);
         setGutter({
@@ -402,13 +447,18 @@ const Gutter = ({ state }) => {
             dragging: false
         })
     };
-
+    //---------------------------------------------------------------
+    //  Set basic style and merge passed gutter style object
+    //---------------------------------------------------------------
     const style = {
         ...stdStyles.gutter,
         ...state.gutterStyle,
         cursor: axis[state.orientation].cursor
     }
-
+    //---------------------------------------------------------------
+    //  Set final component props to be passed to gutter
+    //  component. 
+    //---------------------------------------------------------------
     const gutterProps = {
         style: style,
         className           : state.gutterClassName,
@@ -418,10 +468,14 @@ const Gutter = ({ state }) => {
         'data-is-dragging'  : gutter.dragging,
         'data-split-gutter' : true
     }
-
+    //---------------------------------------------------------------
+    //  Return passed component if one was passed
+    //---------------------------------------------------------------
     if (state.gutterRender)
         return React.cloneElement(state.gutterRender, gutterProps)
-
+    //---------------------------------------------------------------
+    //  Return simple DIV element
+    //---------------------------------------------------------------
     return (
         <div {...gutterProps}/>
     )
@@ -432,7 +486,9 @@ const Gutter = ({ state }) => {
 
 ******************************************************************************************/
 export const Split = ( props ) => {
-
+    //---------------------------------------------------------------
+    //  Set initial state properties
+    //---------------------------------------------------------------
     const [state, setState] = React.useState({
         id: props.id || generalId(),
         render: false,
@@ -454,7 +510,9 @@ export const Split = ( props ) => {
         secondaryInitialState: props.secondaryInitialState ?? true,
         collapsedInitialState: props.collapsedInitialState  ?? false
     })
-
+    //---------------------------------------------------------------
+    //  Set props object to be passed to children
+    //---------------------------------------------------------------
     const splitProps = {
         splitProps: {
             ...state,
@@ -464,13 +522,19 @@ export const Split = ( props ) => {
             getGridTemplateStyle: () => state.gridTemplateStyle
         }
     }
-
+    //---------------------------------------------------------------
+    //  envoke setToRender if state has only been initiallized 
+    //  first time.
+    //---------------------------------------------------------------
     React.useEffect(()=>{
         state.parentRef.current
             && !state.render
             && setToRender(state, setState)
     },[state,setState])
-
+    //---------------------------------------------------------------
+    //  Render wrapper and children if they are objects and there
+    //  are 2 children.
+    //---------------------------------------------------------------
     if(
             props.children.length === 2
         &&  typeof props.children[0] === str.object
@@ -492,7 +556,10 @@ export const Split = ( props ) => {
                 ): null}
             </div>
         )
-
+    //---------------------------------------------------------------
+    //  Render all children without split container if number
+    //  of children is not equal to 2.
+    //---------------------------------------------------------------
     return (
         <>{props.children}</>
     )
