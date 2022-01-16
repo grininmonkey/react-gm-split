@@ -3,11 +3,11 @@ import React from 'react'
 export default function Left ( props ) {
 
     const [expanded, setExpanded] = React.useState(
-        props.splitProps && !props.splitProps.collapsedInitialState
+        props.splitProps && !props.splitProps.isCollapsed()
     )
 
     const [secondaryHidden, setSecondaryHidden] = React.useState(
-        props.splitProps && !props.splitProps.secondaryInitialState
+        props.splitProps && props.splitProps.isSecondaryHidden()
     )
 
     const collapseToggle = () => {

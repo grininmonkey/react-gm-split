@@ -566,9 +566,15 @@ export const Split = ( props ) => {
         splitProps: {
             ...state,
             dispatch: action => action && splitAction(state, action),
+            isCollapsed: () => getSessionData(state)[str.collapsed] 
+                ?? state.collapsedInitialState,
             getSessionData: () => getSessionData(state),
+            isPrimaryHidden: () => getSessionData(state)[str.hidden+str.primary]
+                ?? !state.primaryInitialState,
+            isSecondaryHidden: () => getSessionData(state)[str.hidden+str.secondary]
+                ?? !state.secondaryInitialState,                
             getParentClientRect: () => getBoundingClientRect(state),
-            getGridTemplateStyle: () => state.gridTemplateStyle
+            getGridTemplateStyle: () => state.gridTemplateStyle,
         }
     }
     //---------------------------------------------------------------
