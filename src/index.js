@@ -237,22 +237,39 @@ const actionHide = (state, child) => {
 const actionRestore = (state) => {
     //---------------------------------------------------------------
     //  Update gridTemplate with stored session of last snapshot
-    //  when all sections have values.
+    //  when all sections have values or restore as collapsed
+    //  if primary was hidden after a collapse state.
     //---------------------------------------------------------------
     const session = getSessionData(state)
+    const restore = {
+        collapsed: false,
+        gridTemplateStyle: session.gridTemplateStyle
+    }
 
     if (
             session.collapsed
         ||  session.hiddenPrimary
         ||  session.hiddenSecondary
     ) {
+
+        if (
+                session.collapsed 
+            &&  session.hiddenPrimary
+        ) {
+            restore.collapsed = true
+            restore.gridTemplateStyle = gridTemplateStyle(
+                state,
+                state.collapsedSize,
+                str.gridNone
+            )[gridTemplateStyleKey(state)]
+        }
         gridTemplateUpdate(
             state, null,
-            session.gridTemplateStyle
+            restore.gridTemplateStyle
         )
         updateSessionData(
             state, {
-                collapsed: false,
+                collapsed: restore.collapsed,
                 hiddenPrimary: false,
                 hiddenSecondary: false
             }

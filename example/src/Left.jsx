@@ -26,6 +26,7 @@ export default function Left ( props ) {
 
     return (
         <div data-overflow="auto">
+            {!secondaryHidden && (
             <div 
                 data-button={true}
                 onClick={collapseToggle}
@@ -34,6 +35,7 @@ export default function Left ( props ) {
                     {expanded ? "collapse" : ">"}
                 </span>
             </div>
+            )}
             { expanded && (
             <div 
                 data-button={true}
