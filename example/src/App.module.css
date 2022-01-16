@@ -1,0 +1,37 @@
+.main {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 45px 1fr;
+    color: #393939;
+}
+
+.main > div:first-child,
+.main [data-split-gutter],
+.main [data-button]
+{
+    border: dashed 0px #919191;
+}
+
+.main > div:first-child {
+    color: #ccc;
+    display: flex;
+    font-size: 1.6rem;
+    align-items: center;
+    justify-content: center;
+    border-bottom-width: 1px;
+}
+
+.main [data-split-gutter] {
+    border-left-width: 1px;
+    border-right-width: 1px;
+}
+
+.main  [data-overflow="auto"] {
+    overflow: auto;
+    padding: 10px
+}
+
+.main [data-button] {
+    border-radius: 4px;
+    border-width: 1px;
+}

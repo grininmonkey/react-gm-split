@@ -548,11 +548,11 @@ export const Split = ( props ) => {
                 data-split-container={state.orientation}
             >
                 {state.render ? (
-                    <>
+                    <React.Fragment>
                         {React.cloneElement(props.children[0], state.passProps ? splitProps : null)}
                         <Gutter state={state} />
                         {React.cloneElement(props.children[1], state.passProps ? splitProps : null)}
-                    </>
+                    </React.Fragment>
                 ): null}
             </div>
         )
@@ -561,7 +561,7 @@ export const Split = ( props ) => {
     //  of children is not equal to 2.
     //---------------------------------------------------------------
     return (
-        <>{props.children}</>
+        <React.Fragment>{props.children}</React.Fragment>
     )
 
 }
