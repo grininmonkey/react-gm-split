@@ -68,7 +68,17 @@ const str = {
 const generalId = () => Date.now() + Array.from(
     {length: 2}, () => '-' + Math.floor(Math.random() * 10000)
 ).join('')
-
+//---------------------------------------------------------------
+//  Children array helper, number of objects vs length
+//---------------------------------------------------------------
+const childrenObjects = (children) => children.filter(obj => obj ?? false)
+//---------------------------------------------------------------
+//  Children array helper, number of objects vs length
+//---------------------------------------------------------------
+const childrenCount = (children) => childrenObjects(children).length
+//---------------------------------------------------------------
+//  getBoundingClientRect helper
+//---------------------------------------------------------------
 const getBoundingClientRect = (state) => state.parentRef.current.getBoundingClientRect()
 /*****************************************************************************************
 
@@ -513,6 +523,7 @@ export const Split = ( props ) => {
         render: false,
         parentRef: React.useRef(),
         passProps: props.passProps || false,
+        childCount: childrenCount(props.children),
         gutterSize: props.gutterSize || str.gutterSize,
         gutterStyle: props.gutterStyle,
         orientation: gridTemplateIsRows(props.as) ? str.horizontal : str.vertical,
@@ -542,47 +553,53 @@ export const Split = ( props ) => {
         }
     }
     //---------------------------------------------------------------
-    //  envoke setToRender if state has only been initiallized 
-    //  first time.
+    //  props based.. Child Count & Can Split?
+    //---------------------------------------------------------------
+    const childCount = childrenCount(props.children)    
+    const canSplit = props.children && childCount === 2
+    //---------------------------------------------------------------
+    //  If child count has changed update state
+    //---------------------------------------------------------------
+    childCount !== state.childCount
+        && setState({
+            ...state,
+            childCount
+        })
+    //---------------------------------------------------------------
+    //  envoke setToRender once... first time when canSplit and 
+    //  state.render flag has not be set. Its an instance of the
+    //  wrapper element and not based on the children.
     //---------------------------------------------------------------
     React.useEffect(()=>{
         state.parentRef.current
+            && canSplit
             && !state.render
             && setToRender(state, setState)
     },[state,setState])
     //---------------------------------------------------------------
-    //  Render wrapper and children if they are objects and there
-    //  are 2 children.
+    //  Render wrapper and children if there are objects and there
+    //  are 2 children then split, otherwise just render passed
+    //  children
     //---------------------------------------------------------------
-    if(
-            props.children.length === 2
-        &&  typeof props.children[0] === str.object
-        &&  typeof props.children[1] === str.object
-    )
-        return (
-            <div
-                id={state.id}
-                ref={state.parentRef}
-                style={state.initialParentStyle}
-                data-split-container={state.orientation}
-            >
-                {state.render ? (
-                    <React.Fragment>
-                        {React.cloneElement(props.children[0], state.passProps ? splitProps : null)}
-                        <Gutter state={state} />
-                        {React.cloneElement(props.children[1], state.passProps ? splitProps : null)}
-                    </React.Fragment>
-                ): null}
-            </div>
-        )
-    //---------------------------------------------------------------
-    //  Render all children without split container if number
-    //  of children is not equal to 2.
-    //---------------------------------------------------------------
+    const element = childrenObjects(props.children)
     return (
-        <React.Fragment>{props.children}</React.Fragment>
+        <div
+            id={state.id}
+            ref={state.parentRef}
+            style={canSplit ? state.initialParentStyle : props.style}
+            data-split-container={canSplit ? state.orientation : null}
+        >
+            {canSplit && state.render ? (
+                <React.Fragment>
+                    {React.cloneElement(element[0], state.passProps ? splitProps : null)}
+                    <Gutter state={state} />
+                    {React.cloneElement(element[1], state.passProps ? splitProps : null)}
+                </React.Fragment>
+            ) : (
+                <React.Fragment>{props.children}</React.Fragment>
+            )}
+        </div>
     )
-
 }
 
 Split.propTypes = {

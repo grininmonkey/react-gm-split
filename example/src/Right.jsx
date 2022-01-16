@@ -3,7 +3,7 @@ import React from 'react'
 export default function Right ( props ) {
 
     const [primaryHidden, setPrimaryHidden] = React.useState(
-        !props.splitProps.primaryInitialState
+        props.splitProps && !props.splitProps.primaryInitialState
     )
 
     const primaryToggle = () => {

@@ -3,11 +3,11 @@ import React from 'react'
 export default function Left ( props ) {
 
     const [expanded, setExpanded] = React.useState(
-        !props.splitProps.collapsedInitialState
+        props.splitProps && !props.splitProps.collapsedInitialState
     )
 
     const [secondaryHidden, setSecondaryHidden] = React.useState(
-        !props.splitProps.secondaryInitialState
+        props.splitProps && !props.splitProps.secondaryInitialState
     )
 
     const collapseToggle = () => {
@@ -31,6 +31,7 @@ export default function Left ( props ) {
             {!secondaryHidden && (
             <div 
                 data-button={true}
+                data-bottom-margin={true}
                 onClick={collapseToggle}
             >
                 <span>
