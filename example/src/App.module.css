@@ -34,8 +34,12 @@
 }
 
 .main [data-button] {
-    border-radius: 4px;
+    display: flex;
+    align-items: center;
     border-width: 1px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    justify-content: center;
 }
 
 .main [data-split-container] > div:first-child {

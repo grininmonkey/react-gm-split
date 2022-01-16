@@ -24,20 +24,10 @@ export default function Left ( props ) {
         setSecondaryHidden(!secondaryHidden)
     }
 
-    const btnProps = {
-        style: {
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "8px",
-            justifyContent: "center",
-        },
-        'data-button': true
-    }
-
     return (
         <div data-overflow="auto">
             <div 
-                {...btnProps}
+                data-button={true}
                 onClick={collapseToggle}
             >
                 <span>
@@ -46,7 +36,7 @@ export default function Left ( props ) {
             </div>
             { expanded && (
             <div 
-                {...btnProps}
+                data-button={true}
                 onClick={secondaryToggle}
             >
                 <span>

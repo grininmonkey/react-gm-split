@@ -13,19 +13,10 @@ export default function Right ( props ) {
         setPrimaryHidden(!primaryHidden)
     }
 
-    const btnProps = {
-        style: {
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-        },
-        'data-button': true
-    }
-
     return (
         <div data-overflow="auto">
             <div
-                {...btnProps}
+                data-button={true}
                 onClick={primaryToggle}
             >
                 <span>
