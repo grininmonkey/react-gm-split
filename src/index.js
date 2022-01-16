@@ -27,7 +27,8 @@ const stdStyles = {
     parent: {
         width   : "100%",
         height  : "100%",
-        display : "grid"
+        display : "grid",
+        overflow: "hidden"
     },
     gutter: {
         display         : "flex",
