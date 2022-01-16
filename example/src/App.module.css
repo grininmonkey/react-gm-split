@@ -21,6 +21,7 @@
     align-items: center;
     justify-content: center;
     border-bottom-width: 1px;
+    user-select: none;
 }
 
 .main [data-split-gutter] {

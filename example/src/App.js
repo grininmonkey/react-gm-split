@@ -6,9 +6,15 @@ import styles from './App.module.css'
 
 const App = () => {
   
+  const[counter, setCounter] = React.useState(0)
+
+  const onClick = () => {
+    setCounter(counter + 1)
+  }
+
   return (
       <div className={styles.main}>
-          <div>
+          <div onClick={onClick}>
             <span>---header---</span>
           </div>
           <div>
@@ -21,7 +27,7 @@ const App = () => {
               initialPrimarySize="20%"
             >
               <Left/>
-              <Right/>
+              <Right testCounter={counter}/>
             </Split>
           </div>
       </div>

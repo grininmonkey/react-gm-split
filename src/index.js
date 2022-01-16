@@ -194,11 +194,12 @@ const gridTemplateUpdate = (state, newPrimary, newGridTemplateStyle, gutter) => 
     Actions
 
 ******************************************************************************************/
+//---------------------------------------------------------------
+//  Set SessionData and then update gridTemplate with 
+//  collapsedSize as new primary size and gutterSize as none
+//---------------------------------------------------------------
 const actionCollapse = (state) => {
-    //---------------------------------------------------------------
-    //  Set SessionData and then update gridTemplate with 
-    //  collapsedSize as new primary size and gutterSize as none
-    //---------------------------------------------------------------
+
     if (!getSessionData(state).collapsed) {
         updateSessionData(
             state, {
@@ -212,12 +213,12 @@ const actionCollapse = (state) => {
 
     return true
 }
-
+//---------------------------------------------------------------
+//  Set SessionData and then update gridTemplate with
+//  0 sized target and gutter sections
+//---------------------------------------------------------------
 const actionHide = (state, child) => {
-    //---------------------------------------------------------------
-    //  Set SessionData and then update gridTemplate with
-    //  0 sized target and gutter sections
-    //---------------------------------------------------------------
+
     if (!getSessionData(state)[str.hidden+child]) {
         updateSessionData(
             state, {
@@ -233,13 +234,13 @@ const actionHide = (state, child) => {
 
     return true
 }
-
+//---------------------------------------------------------------
+//  Update gridTemplate with stored session of last snapshot
+//  when all sections have values or restore as collapsed
+//  if primary was hidden after a collapse state.
+//---------------------------------------------------------------
 const actionRestore = (state) => {
-    //---------------------------------------------------------------
-    //  Update gridTemplate with stored session of last snapshot
-    //  when all sections have values or restore as collapsed
-    //  if primary was hidden after a collapse state.
-    //---------------------------------------------------------------
+
     const session = getSessionData(state)
     const restore = {
         collapsed: false,
@@ -278,11 +279,11 @@ const actionRestore = (state) => {
 
     return true
 }
-
+//---------------------------------------------------------------
+//  Route action to corresponding method.
+//---------------------------------------------------------------
 const splitAction = (state, action) => {
-    //---------------------------------------------------------------
-    //  Route action to corresponding method.
-    //---------------------------------------------------------------
+
     switch (action) {
         case "collapse":
             return actionCollapse(state);

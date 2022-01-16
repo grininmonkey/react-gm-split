@@ -24,6 +24,7 @@ export default function Right ( props ) {
                     {!primaryHidden ? "hide primary" : "restore"}
                 </span>
             </div>
+            <span>HeaderClicks: {props.testCounter}</span>
         </div>
     )
 
