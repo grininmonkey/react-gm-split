@@ -561,6 +561,7 @@ export const Split = ( props ) => {
     })
     //---------------------------------------------------------------
     //  Set props object to be passed to children
+    //  and define a couple helper funcs
     //---------------------------------------------------------------
     const splitProps = {
         splitProps: {
