@@ -13,15 +13,17 @@ export default function Left ( props ) {
     const collapseToggle = () => {
         props.splitProps.dispatch(
             expanded ? "collapse" : "restore"
+        ) && setExpanded(
+            !expanded
         )
-        setExpanded(!expanded)
     }
 
     const secondaryToggle = () => {
         props.splitProps.dispatch(
             secondaryHidden ? "restore" : "hideSecondary"
+        ) && setSecondaryHidden(
+            !secondaryHidden
         )
-        setSecondaryHidden(!secondaryHidden)
     }
 
     return (

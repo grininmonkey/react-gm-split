@@ -9,8 +9,9 @@ export default function Right ( props ) {
     const primaryToggle = () => {
         props.splitProps.dispatch(
             primaryHidden ? "restore" : "hidePrimary"
+        ) && setPrimaryHidden(
+            !primaryHidden
         )
-        setPrimaryHidden(!primaryHidden)
     }
 
     return (
