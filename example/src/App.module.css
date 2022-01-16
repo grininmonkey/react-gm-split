@@ -48,6 +48,10 @@
     margin-right:10px;
 }
 
+.main > div:first-child > div:last-child > span {
+    margin-right: 10px;
+}
+
 .main [data-split-gutter] {
     border-left-width: 1px;
     border-right-width: 1px;
