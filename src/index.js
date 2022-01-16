@@ -178,6 +178,26 @@ const gridTemplateStyle = (state, primary, gutter, hideChild) => {
 
 }
 
+const gridTemplateStyleFromSession = state => {
+    
+    const session = getSessionData(state)
+    
+    if (session.hiddenPrimary || session.hiddenSecondary)
+        return gridTemplateStyle(
+            state, null, null,
+            session.hiddenPrimary ? str.primary : str.secondary 
+        )
+    if (session.collapsed)
+        return gridTemplateStyle(
+            state,
+            state.collapsedSize,
+            str.gridNone
+        )
+    return {
+        [gridTemplateStyleKey(state)]: session.gridTemplateStyle
+    }
+}
+
 const gridTemplateUpdate = (state, newPrimary, newGridTemplateStyle, gutter) => {
 
     const styleKey = gridTemplateStyleKey(state)
@@ -293,7 +313,6 @@ const actionRestore = (state) => {
 //  Route action to corresponding method.
 //---------------------------------------------------------------
 const splitAction = (state, action) => {
-
     switch (action) {
         case "collapse":
             return actionCollapse(state);
@@ -306,7 +325,6 @@ const splitAction = (state, action) => {
         default:
             return false;
     }
-
 }
 /*****************************************************************************************
 
@@ -471,6 +489,7 @@ const Gutter = ({ state }) => {
     //---------------------------------------------------------------
     const onPointerUp = event => {
         event.currentTarget.releasePointerCapture(event.pointerId);
+        updateSessionData(state,{})
         setGutter({
             ...gutter,
             dragging: false
@@ -558,7 +577,22 @@ export const Split = ( props ) => {
     const childCount = childrenCount(props.children)    
     const canSplit = props.children && childCount === 2
     //---------------------------------------------------------------
-    //  If child count has changed update state
+    //  Determine initial style, if session or initial or passed
+    //  style if not canSplit
+    //---------------------------------------------------------------
+    const containerStyle = () => {
+        const sessionTemplate = gridTemplateStyleFromSession(state)
+        return canSplit 
+            ? sessionTemplate[gridTemplateStyleKey(state)] 
+                ? {
+                    ...stdStyles.parent,
+                    ...sessionTemplate
+                }
+                : state.initialParentStyle
+            : props.style
+    }
+    //---------------------------------------------------------------
+    //  If child count has changed update state, trigger render
     //---------------------------------------------------------------
     childCount !== state.childCount
         && setState({
@@ -586,7 +620,7 @@ export const Split = ( props ) => {
         <div
             id={state.id}
             ref={state.parentRef}
-            style={canSplit ? state.initialParentStyle : props.style}
+            style={containerStyle()}
             data-split-container={canSplit ? state.orientation : null}
         >
             {canSplit && state.render ? (
