@@ -4,8 +4,6 @@ import Split from 'react-gm-split'
 
 export default function Right ( props ) {
 
-    console.log('Right',props)
-
     const [primaryHidden, setPrimaryHidden] = React.useState(
         props.splitProps && props.splitProps.isPrimaryHidden()
     )
