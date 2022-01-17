@@ -44,9 +44,10 @@ return(
     <Split>
 )
 ```
-The `Split` component will setup a split when there are only 2 items of type object within the children array. So there can be `null` or `false` items as a result of a map or direct conditions like above.
+The `Split` component will setup a split when there are only 2 objects within the children array that are not `null` or `false`. So there can be `null` or `false` items as a result of a map or direct conditions like above and will be
+ignored when checking for render items.
 
-When there are only 1, or more than 2 object items, `Split` will return those items but not setup as a "split" layout with a gutter. In this senerio/condition, the `style` property passed to `Split` will be applied to the parent wrapper. When doing a split `initialParentStyle` property is applied.
+When there are only 1, or more than 2 render items, `Split` will return those items but not setup as a "split" layout with a gutter and will esentially just be a wrapping `<div>`. In this senerio/condition, the `style` property passed to `Split` will be applied to the parent wrapper. When doing a split the `style` property is ignored and `initialParentStyle` property is applied.
 
 ## Properties
 - `id: string | number`
