@@ -8,7 +8,7 @@ import OtherLeft from './OtherLeft'
 const App = () => {
   
   const[counter, setCounter] = React.useState(0)
-  const[testNumber, setTestNumber] = React.useState(1)
+  const[exampleNumber, setExampleNumber] = React.useState(2)
 
   const onClick = () => {
     setCounter(counter + 1)
@@ -23,27 +23,27 @@ const App = () => {
               <div>
               <span 
                   data-button={true}
-                  onClick={()=>setTestNumber(1)}
+                  onClick={()=>setExampleNumber(1)}
                 >
-                  Test1
+                  Example1
                 </span>                
                 <span 
                   data-button={true}
-                  onClick={()=>setTestNumber(2)}
+                  onClick={()=>setExampleNumber(2)}
                 >
-                  Test2
+                  Example2
                 </span>
                 <span 
                   data-button={true}
-                  onClick={()=>setTestNumber(3)}
+                  onClick={()=>setExampleNumber(3)}
                 >
-                  Test3
+                  Example3
                 </span>
                 <span 
                   data-button={true}
-                  onClick={()=>setTestNumber(4)}
+                  onClick={()=>setExampleNumber(4)}
                 >
-                  Test4
+                  Example4
                 </span>                                
               </div>
           </div>
@@ -56,13 +56,13 @@ const App = () => {
               primaryMaxSize="90%"
               initialPrimarySize="20%"
             >
-              {testNumber === 1 && <div>Single Child</div>}
-              {testNumber === 2 && <Left/>}
-              {testNumber === 4 && <OtherLeft/>}
-              {(testNumber === 2 || testNumber === 4) && <Right testCounter={counter}/>}
-              {testNumber === 3 && <div>Child 1</div>}
-              {testNumber === 3 && <div>Child 2</div>}
-              {testNumber === 3 && <div>Child 3</div>}
+              {exampleNumber === 1 && <div>Single Child</div>}
+              {exampleNumber === 2 && <Left/>}
+              {exampleNumber === 4 && <OtherLeft/>}
+              {(exampleNumber === 2 || exampleNumber === 4) && <Right ExampleCounter={counter}/>}
+              {exampleNumber === 3 && <div>Child 1</div>}
+              {exampleNumber === 3 && <div>Child 2</div>}
+              {exampleNumber === 3 && <div>Child 3</div>}
             </Split>
           </div>
       </div>

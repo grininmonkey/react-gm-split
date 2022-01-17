@@ -71,7 +71,7 @@ const generalId = () => Date.now() + Array.from(
 //---------------------------------------------------------------
 //  Children array helper, number of objects vs length
 //---------------------------------------------------------------
-const childrenObjects = (children) => children.filter(obj => obj ?? false)
+const childrenObjects = (children) => children.filter(obj => React.isValidElement(obj))
 //---------------------------------------------------------------
 //  Children array helper, number of objects vs length
 //---------------------------------------------------------------
@@ -563,7 +563,7 @@ export const Split = ( props ) => {
     //  Set props object to be passed to children
     //  and define a couple helper funcs
     //---------------------------------------------------------------
-    const splitProps = {
+    const _splitProps = {
         splitProps: {
             ...state,
             dispatch: action => action && splitAction(state, action),
@@ -632,9 +632,9 @@ export const Split = ( props ) => {
         >
             {canSplit && state.render ? (
                 <React.Fragment>
-                    {React.cloneElement(element[0], state.passProps ? splitProps : null)}
+                    {React.cloneElement(element[0], state.passProps ? _splitProps : null)}
                     <Gutter state={state} />
-                    {React.cloneElement(element[1], state.passProps ? splitProps : null)}
+                    {React.cloneElement(element[1], state.passProps ? _splitProps : null)}
                 </React.Fragment>
             ) : (
                 <React.Fragment>{props.children}</React.Fragment>
