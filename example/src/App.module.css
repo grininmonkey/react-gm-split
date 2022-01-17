@@ -18,7 +18,11 @@
 
 .main > div:first-child,
 .main [data-split-gutter],
-.main [data-button]
+.main [data-button],
+.main [data-border-left],
+.main [data-border-right],
+.main [data-border-top],
+.main [data-border-bottom]
 {
     border: dashed 0px var(--color-border);
 }
@@ -52,29 +56,25 @@
     margin-right: 10px;
 }
 
-.main [data-border-left] {
+.main [data-border-left="true"] {
     border-left-width: 1px;
 }
 
-.main [data-border-right] {
-    border-left-width: 1px;
-}
-
-.main [data-lots-padding] {
-    padding: 20px;
-}
-
-/* 
-.main [data-split-gutter][data-orientation="vertical"]{
-    border-left-width: 1px;
+.main [data-border-right="true"] {
     border-right-width: 1px;
 }
 
-.main [data-split-gutter][data-orientation="horizontal"]{
+.main [data-border-top="true"] {
     border-top-width: 1px;
-    border-bottom-width: 1px;
-} */
+}
 
+.main [data-border-bottom="true"] {
+    border-bottom-width: 1px;
+}
+
+.main [data-lots-padding="true"] {
+    padding: 20px;
+}
 
 .main [data-overflow="auto"] {
     overflow: auto;
@@ -99,7 +99,6 @@
     margin-bottom: 8px;
 }
 
-
 .main [data-section]
 {
     background-color: var(--color-section);
@@ -107,4 +106,9 @@
 
 .main [data-content] {
     background-color: var(--color-content);
+}
+
+.main [data-split-gutter]:hover {
+    background-color: var(--color-border-hover);
+    transition: all .6s ease-in 0s;
 }

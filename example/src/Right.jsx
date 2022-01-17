@@ -4,10 +4,11 @@ import Split from 'react-gm-split'
 
 export default function Right ( props ) {
 
+    const [lorem, setLorem] = React.useState(false)
     const [primaryHidden, setPrimaryHidden] = React.useState(
         props.splitProps && props.splitProps.isPrimaryHidden()
     )
-
+    
     const primaryToggle = () => {
         props.splitProps && props.splitProps.dispatch(
             primaryHidden ? "restore" : "hidePrimary"
@@ -22,19 +23,26 @@ export default function Right ( props ) {
             as="rows"
             passProps={true}
             gutterSize="7px"
+            data-border-left={!primaryHidden}
         >
-            <div data-overflow="auto" data-content data-lots-padding>
-                <div
+            <div data-overflow="auto" data-content data-lots-padding data-border-bottom={lorem}>
+                <span
                     data-button
+                    data-bottom-margin
                     onClick={primaryToggle}
                 >
-                    <span>
-                        {!primaryHidden ? "hide primary" : "restore"}
-                    </span>
-                </div>
-                <span>HeaderClicks: {props.ExampleCounter}</span>
+                    {!primaryHidden ? "hide primary" : "restore"}
+                </span>
+                <span
+                    data-button
+                    data-bottom-margin
+                    onClick={()=>setLorem(!lorem)}
+                >
+                    {lorem ? "Hide" : "Show"} Something someone said in 45BC
+                </span>
+                <span>HeaderClicks: {props.ExampleCounter}</span><br/>
             </div>
-            <Lorem/>
+            {lorem && <Lorem/>}
         </Split>
     )
 

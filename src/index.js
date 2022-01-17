@@ -78,12 +78,21 @@ const childrenObjects = (children) => children.filter(obj => React.isValidElemen
 //---------------------------------------------------------------
 const childrenCount = (children) => childrenObjects(children).length
 //---------------------------------------------------------------
-//  Child  helper, pass split props object if child is
+//  Child helper, pass split props object if child is
 //  a function
 //---------------------------------------------------------------
 const childPassProps = (state, element, object) => state.passProps 
     && typeof element.type === str.function 
         ? object : null
+//---------------------------------------------------------------
+//  Object helper, return object with key:value where key
+//  matches the pattern "data", eg  data-is-something
+//---------------------------------------------------------------
+const dataProps = (props) => Object.fromEntries(Object.keys(props).filter(
+    obj => /data/.test(obj)).map(
+        key => [key,props[key]]
+    )
+)
 //---------------------------------------------------------------
 //  getBoundingClientRect helper
 //---------------------------------------------------------------
@@ -649,6 +658,7 @@ export const Split = ( props ) => {
             ref={state.parentRef}
             style={containerStyle()}
             data-split-container={canSplit ? state.orientation : null}
+            {...dataProps(props)}
         >
             {canSplit && state.render ? (
                 <React.Fragment>

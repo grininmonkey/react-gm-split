@@ -3,9 +3,9 @@ import React from "react";
 export default function OtherLeft (props) {
 
     return (
-        <div>
+        <span data-section data-lots-padding>
             A Different Menu/Content
-        </div>
+        </span>
     )
 
 }

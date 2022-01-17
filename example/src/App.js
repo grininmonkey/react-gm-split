@@ -57,13 +57,13 @@ const App = () => {
               primaryMaxSize="90%"
               initialPrimarySize="20%"
             >
-              {exampleNumber === 1 && <div>Single Child</div>}
+              {exampleNumber === 1 && <div data-lots-padding>Single Child</div>}
               {exampleNumber === 2 && <Left/>}
               {exampleNumber === 4 && <OtherLeft/>}
               {(exampleNumber === 2 || exampleNumber === 4) && <Right ExampleCounter={counter}/>}
-              {exampleNumber === 3 && <div>Child 1</div>}
-              {exampleNumber === 3 && <div>Child 2</div>}
-              {exampleNumber === 3 && <div>Child 3</div>}
+              {exampleNumber === 3 && <div data-lots-padding>Child 1</div>}
+              {exampleNumber === 3 && <div data-lots-padding>Child 2</div>}
+              {exampleNumber === 3 && <div data-lots-padding>Child 3</div>}
             </Split>
           </div>
       </div>

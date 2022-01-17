@@ -27,7 +27,7 @@ export default function Left ( props ) {
     }
 
     return (
-        <div data-overflow="auto" data-section>
+        <div data-overflow="auto" data-section data-border-right={expanded}>
             {!secondaryHidden && (
             <div 
                 data-button={true}
