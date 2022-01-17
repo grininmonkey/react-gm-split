@@ -136,9 +136,7 @@ const updateSessionData = (state, object, skipTemplate) => {
         )
     )
 }
-/******************************************************************************************
-  gridTemplate[Columns/Rows]
-******************************************************************************************/
+
 const gridTemplateIsRows = s => typeof s === str.string
     && s.toLowerCase() === str.rows
 
