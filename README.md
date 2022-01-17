@@ -10,7 +10,7 @@
 npm install --save react-gm-split
 ```
 
-## Or
+### Or
 
 Download the raw src/index.js file from this repo and save it within your existing project (rename and/or modify it) and then import it... 
 ```jsx
