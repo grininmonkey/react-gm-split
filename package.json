@@ -1,6 +1,6 @@
 {
   "name": "react-gm-split",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic split component using CSS grid",
   "author": "grininmonkey",
   "license": "MIT",

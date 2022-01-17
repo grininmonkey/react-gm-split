@@ -55,6 +55,7 @@ const str = {
     collapsed    : "collapsed",
     secondary    : "Secondary",
     horizontal   : "horizontal",
+    visibility   : "visibility",
     gutterSize   : "5px",
     primarySize  : "50%",
     collapsedSize: "50px",
@@ -93,6 +94,16 @@ const dataProps = (props) => Object.fromEntries(Object.keys(props).filter(
         key => [key,props[key]]
     )
 )
+//---------------------------------------------------------------
+//  DOM child index helper
+//---------------------------------------------------------------
+const primaryChildIndex = (state) => state.primaryIndex === 1 ? 2 : 0
+//---------------------------------------------------------------
+//  Hide child index helper
+//---------------------------------------------------------------
+const hideIndex = (state,name) => name === str.secondary
+    ? primaryChildIndex(state) === 0 ? 2 : 0
+    : primaryChildIndex(state) === 0 ? 0 : 2
 //---------------------------------------------------------------
 //  getBoundingClientRect helper
 //---------------------------------------------------------------
@@ -151,25 +162,23 @@ const gridTemplateStyleObject = (state, array) => {
 
 const gridTemplateStyle = (state, primary, gutter, hideChild) => {
 
-    const primaryStyleIndex = state.primaryIndex === 1 ? 2 : 0
+    const primaryStyleIndex = primaryChildIndex(state)
     //---------------------------------------------------------------
     //  Set the gridTemplate style property hiding gutter and
     //  target child by setting each to 0px and the non target
     //  to full.
     //---------------------------------------------------------------
     if ( hideChild ) {
-        const hideIndex = hideChild === str.secondary
-            ? primaryStyleIndex === 0 ? 2 : 0
-            : primaryStyleIndex === 0 ? 0 : 2
+        const index = hideIndex(state,hideChild)
         //-----------------------------------------------------------
         //  Return result as gridTemplate<Rows|Columns> property 
         //  string.
         //-----------------------------------------------------------
         return gridTemplateStyleObject(state,
             [
-                hideIndex === 0 ? str.gridNone : str.gridAuto,
+                index === 0 ? str.gridNone : str.gridAuto,
                 str.gridNone,
-                hideIndex === 2 ? str.gridNone : str.gridAuto
+                index === 2 ? str.gridNone : str.gridAuto
             ]
         )
     }
@@ -265,6 +274,18 @@ const actionCollapse = (state) => {
 const actionHide = (state, child) => {
 
     if (!getSessionData(state)[str.hidden+child]) {
+        //--------------------------------------------------------
+        // extra step for webkit based, where child with overflow
+        // and width set to 0px will be visible due to scroll 
+        // arrows so set visibility to hidden.
+        //--------------------------------------------------------
+        const hidexes = [hideIndex(state,child),1]
+        hidexes.forEach(index => {
+            state.parentRef.current.children[index].style[
+                str.visibility
+            ] = str.hidden
+        })
+
         updateSessionData(
             state, {
                 [str.hidden+child]: true
@@ -297,6 +318,16 @@ const actionRestore = (state) => {
         ||  session.hiddenPrimary
         ||  session.hiddenSecondary
     ) {
+        //--------------------------------------------------------
+        // extra step for webkit based, where child with overflow
+        // and width set to 0px will be visible due to scroll 
+        // arrows so set visibility to hidden. Remove visiblity
+        // style set by hide action
+        //--------------------------------------------------------
+        const indexes = [0,1,2]
+        indexes.forEach(index => {
+            state.parentRef.current.children[index].style.removeProperty(str.visibility)
+        })
 
         if (
                 session.collapsed 
