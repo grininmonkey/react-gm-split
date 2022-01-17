@@ -7,14 +7,14 @@
 ## Install
 
 ```bash
-Work In Progress: Not Ready Yet...
+npm install --save react-gm-split
 ```
 
 ## Or
 
 Download the raw src/index.js file from this repo and save it within your existing project (rename and/or modify it) and then import it... 
 ```jsx
-import Split from '<path to saved file>'
+import Split from '<relative path to the file>'
 ```
 
 ## Usage
@@ -48,6 +48,8 @@ The `Split` component will setup a split when there are only 2 objects within th
 ignored when checking for render items.
 
 When there are only 1, or more than 2 render items, `Split` will return those items but not setup as a "split" layout with a gutter and will esentially just be a wrapping `<div>`. In this senerio/condition, the `style` property passed to `Split` will be applied to the parent wrapper. When doing a split the `style` property is ignored and `initialParentStyle` property is applied.
+
+Review the examples for a better sense of how to mix parent state vs component's dispatch actions.
 
 ## Properties
 - `id: string | number`
