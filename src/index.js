@@ -504,11 +504,22 @@ const Gutter = ({ state }) => {
         })
     };
     //---------------------------------------------------------------
+    //  Set merge gutter style object, use passed style or
+    //  set width/height property.
+    //---------------------------------------------------------------
+    const gutterStyle = () => {
+        if (state.gutterStyle)
+            return state.gutterStyle
+        return {
+            [axis[state.orientation].client]: state.gutterSize
+        }
+    }
+    //---------------------------------------------------------------
     //  Set basic style and merge passed gutter style object
     //---------------------------------------------------------------
     const style = {
         ...stdStyles.gutter,
-        ...state.gutterStyle,
+        ...gutterStyle(),
         cursor: axis[state.orientation].cursor
     }
     //---------------------------------------------------------------
@@ -522,7 +533,8 @@ const Gutter = ({ state }) => {
         onPointerDown       : onPointerDown,
         onPointerMove       : onPointerMove,
         'data-is-dragging'  : gutter.dragging,
-        'data-split-gutter' : true
+        'data-split-gutter' : true,
+        'data-orientation'  : state.orientation
     }
     //---------------------------------------------------------------
     //  Return passed component if one was passed

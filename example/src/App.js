@@ -49,6 +49,7 @@ const App = () => {
           </div>
           <div>
             <Split
+              id="exampleRoot"
               passProps={true}
               gutterSize="7px"
               collapsedSize="40px"

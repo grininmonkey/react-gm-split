@@ -21,8 +21,9 @@ export default function Right ( props ) {
             id="lorem45bc"
             as="rows"
             passProps={true}
+            gutterSize="7px"
         >
-            <div data-overflow="auto" data-test>
+            <div data-overflow="auto" data-content data-lots-padding>
                 <div
                     data-button
                     onClick={primaryToggle}
@@ -31,27 +32,10 @@ export default function Right ( props ) {
                         {!primaryHidden ? "hide primary" : "restore"}
                     </span>
                 </div>
-                <span>HeaderClicks: {props.testCounter}</span>
+                <span>HeaderClicks: {props.ExampleCounter}</span>
             </div>
             <Lorem/>
         </Split>
     )
 
 }
-
-/*
-
-<div data-overflow="auto">
-    <div
-        data-button={true}
-        onClick={primaryToggle}
-    >
-        <span>
-            {!primaryHidden ? "hide primary" : "restore"}
-        </span>
-    </div>
-    <span>HeaderClicks: {props.testCounter}</span>
-</div>
-
-
-*/

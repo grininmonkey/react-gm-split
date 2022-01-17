@@ -4,7 +4,7 @@ export default function Lorem(props) {
 
 
     return (
-        <div style={{overflow:"auto"}}>
+        <div style={{overflow:"auto"}} data-lots-padding>
             <div>
                 <br/><br/>
                 <div 
