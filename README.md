@@ -37,10 +37,10 @@ or (as a concept example)
 ```jsx
 return(
     <Split>
-      {someVarA === 1 && <SomeComponentA>}
-      {someVarA === 2 && <SomeComponentB>}
-      {someVarB === 1 && <SomeComponentC>}
-      {someVarB === 2 && <SomeComponentD>}
+      {someVarA === 1 && <SomeComponentA/>}
+      {someVarA === 2 && <SomeComponentB/>}
+      {someVarB === 1 && <SomeComponentC/>}
+      {someVarB === 2 && <SomeComponentD/>}
     <Split>
 )
 ```
