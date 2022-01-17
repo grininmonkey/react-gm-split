@@ -548,7 +548,7 @@ const Gutter = ({ state }) => {
     //---------------------------------------------------------------
     //  Return passed component if one was passed
     //---------------------------------------------------------------
-    if (state.gutterRender)
+    if (React.isValidElement(state.gutterRender))
         return React.cloneElement(state.gutterRender, gutterProps)
     //---------------------------------------------------------------
     //  Return simple DIV element
