@@ -26,8 +26,8 @@ import Split from 'react-gm-split'
 export default function MyComponent(props) {
   return(
     <Split>
-      <MyLeftComponent>
-      <MyRightComponent>
+      <MyLeftComponent/>
+      <MyRightComponent/>
     <Split>
   )
 }
