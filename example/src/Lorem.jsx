@@ -2,7 +2,6 @@ import React from "react"
 
 export default function Lorem(props) {
 
-    console.log('Lorem',props)
 
     return (
         <div style={{overflow:"auto"}}>

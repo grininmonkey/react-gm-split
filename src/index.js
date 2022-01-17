@@ -50,6 +50,7 @@ const str = {
     gridUnit     : "fr",
     gridAuto     : "1fr",
     gridNone     : "0px",
+    function     : "function",
     vertical     : "vertical",
     collapsed    : "collapsed",
     secondary    : "Secondary",
@@ -76,6 +77,13 @@ const childrenObjects = (children) => children.filter(obj => React.isValidElemen
 //  Children array helper, number of objects vs length
 //---------------------------------------------------------------
 const childrenCount = (children) => childrenObjects(children).length
+//---------------------------------------------------------------
+//  Child  helper, pass split props object if child is
+//  a function
+//---------------------------------------------------------------
+const childPassProps = (state, element, object) => state.passProps 
+    && typeof element.type === str.function 
+        ? object : null
 //---------------------------------------------------------------
 //  getBoundingClientRect helper
 //---------------------------------------------------------------
@@ -632,9 +640,9 @@ export const Split = ( props ) => {
         >
             {canSplit && state.render ? (
                 <React.Fragment>
-                    {React.cloneElement(element[0], state.passProps ? _splitProps : null)}
+                    {React.cloneElement(element[0], childPassProps(state,element[0],_splitProps))}
                     <Gutter state={state} />
-                    {React.cloneElement(element[1], state.passProps ? _splitProps : null)}
+                    {React.cloneElement(element[1],  childPassProps(state,element[1],_splitProps))}
                 </React.Fragment>
             ) : (
                 <React.Fragment>{props.children}</React.Fragment>

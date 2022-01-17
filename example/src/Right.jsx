@@ -22,7 +22,7 @@ export default function Right ( props ) {
             as="rows"
             passProps={true}
         >
-            <div data-overflow="auto">
+            <div data-overflow="auto" data-test>
                 <div
                     data-button
                     onClick={primaryToggle}
