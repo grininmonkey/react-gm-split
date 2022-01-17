@@ -32,6 +32,21 @@ export default function MyComponent(props) {
   )
 }
 ```
+or (as a concept example)
+
+```jsx
+return(
+    <Split>
+      {someVarA === 1 && <SomeComponentA>}
+      {someVarA === 2 && <SomeComponentB>}
+      {someVarB === 1 && <SomeComponentC>}
+      {someVarB === 2 && <SomeComponentD>}
+    <Split>
+)
+```
+The `Split` component will setup a split when there are only 2 items of type object within the .children array. So there can be `null` or `false` items as a result of a map or direct conditions like above.
+
+When there are only 1 or more than 2 object items, `Split` will return those items but not setup as "split" layout.
 
 ## Properties
 - `id: string | number`
@@ -68,6 +83,9 @@ When set to `{true}` an additional object named `splitProps` is passed to the ch
   - restore
   - hidePrimary
   - hideSecondary
+- `isCollapsed`
+- `isPrimaryHidden`
+- `isSecondaryHidden`
 - `getSessionData()`
 - `getParentClientRect()`
 - `getGridTemplateStyle()`
