@@ -1,25 +1,31 @@
-
 declare module 'react-gm-split' {
 
-	function Split (
+	import React from 'react';
+
+	export type splitAs  = 'Columns' | 'Rows';
+	export type Size = string | number;
+
+	interface ReactGMSplitProps {
 		id?: string | number,
-		as?: string,
+		as?: splitAs,
 		passProps?: boolean,
-		gutterSize?: string | number,
-		gutterStyle?: object,
+		gutterSize?: Size,
+		gutterStyle?: React.CSSProperties,
 		gutterRender?: any,
 		primaryIndex?: number,
-		collapsedSize?: string | number,
-		primaryMinSize?: string | number,
-		primaryMaxSize?: string | number,
+		collapsedSize?: Size,
+		primaryMinSize?: Size,
+		primaryMaxSize?: Size,
 		gutterClassName?: string,
-		initialPrimarySize?: string | number,
+		initialPrimarySize?: Size,
 		primaryInitialState?: boolean,
 		secondaryInitialState?: boolean,
 		collapsedInitialState?: boolean,
 		props?: any
-	): any;
+	}
 
-	export default Split
+	const Split: React.FC<ReactGMSplitProps>;
+
+	export default Split;
 
 }
