@@ -11,7 +11,7 @@
 }
 
 .main {
-    grid-template-rows: 45px 1fr;
+    grid-template-rows: 45px calc(100vh - 45px);
     background-color: var(--color-content);
     color: var(--color);
 }
