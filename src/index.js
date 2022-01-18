@@ -105,6 +105,22 @@ const hideIndex = (state,name) => name === str.secondary
     ? primaryChildIndex(state) === 0 ? 2 : 0
     : primaryChildIndex(state) === 0 ? 0 : 2
 //---------------------------------------------------------------
+//  Hide child helper
+//---------------------------------------------------------------
+const hideChild = (state, child) => {
+    const hidex = hideIndex(state,child)
+    const hidexes = [hidex,1]
+    hidexes.forEach(index => {
+        state.parentRef.current.children[index].style[
+            str.visibility
+        ] = str.hidden
+        if (index === hidex)
+            state.parentRef.current.children[index].setAttribute(
+                'data-is-hidden', true
+            )
+    })
+}
+//---------------------------------------------------------------
 //  getBoundingClientRect helper
 //---------------------------------------------------------------
 const getBoundingClientRect = (state) => state.parentRef.current.getBoundingClientRect()
@@ -147,7 +163,11 @@ const updateSessionData = (state, object, skipTemplate) => {
         )
     )
 }
+/*****************************************************************************************
 
+    gridTemplate
+
+******************************************************************************************/
 const gridTemplateIsRows = s => typeof s === str.string
     && s.toLowerCase() === str.rows
 
@@ -279,12 +299,7 @@ const actionHide = (state, child) => {
         // and width set to 0px will be visible due to scroll 
         // arrows so set visibility to hidden.
         //--------------------------------------------------------
-        const hidexes = [hideIndex(state,child),1]
-        hidexes.forEach(index => {
-            state.parentRef.current.children[index].style[
-                str.visibility
-            ] = str.hidden
-        })
+        hideChild(state, child)
 
         updateSessionData(
             state, {
@@ -327,6 +342,7 @@ const actionRestore = (state) => {
         const indexes = [0,1,2]
         indexes.forEach(index => {
             state.parentRef.current.children[index].style.removeProperty(str.visibility)
+            state.parentRef.current.children[index].removeAttribute('data-is-hidden')
         })
 
         if (
@@ -434,12 +450,12 @@ const setToRender = (state, setState) => {
     //  with Primary taking precedence of Secondary.
     //---------------------------------------------------------------------
     if (!state.primaryInitialState || !state.secondaryInitialState) {
+        const hideChild = !state.primaryInitialState ? str.primary : str.secondary
         setSession(str.hidden + (
             !state.primaryInitialState ? str.primary : str.secondary
         ))
-        template = gridTemplateStyle(state, null, null,
-            !state.primaryInitialState ? str.primary : str.secondary
-        )
+        hideChild(state,hideChild)
+        template = gridTemplateStyle(state, null, null, hideChild )
     }
     //---------------------------------------------------------------------
     //  Set parent state with updated properties and template style
@@ -674,6 +690,11 @@ const Split = ( props ) => {
             && canSplit
             && !state.render
             && setToRender(state, setState)
+        if(canSplit && state.render) {
+            const session = getSessionData(state)
+            session.hiddenPrimary && hideChild(state,str.primary) 
+            session.hiddenSecondary && hideChild(state,str.secondary)    
+        }
     },[state,setState])
     //---------------------------------------------------------------
     //  Render wrapper and children if there are objects and there
