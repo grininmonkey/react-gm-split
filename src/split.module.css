@@ -1,0 +1,186 @@
+/* ------------------------------------------- */
+/* Main
+/* ------------------------------------------- */
+
+.withHeader{
+	cursor: default;
+}
+
+.vertical,
+.horizontal,
+.withHeader
+{
+	--size-left-top: 50%;
+	--size-right-bottom: 0;
+	--size-gutter: 7px;
+	--gutter-hover-color: #4b5162; 
+	--gutter-hover-opacity: .6;
+}
+
+.vertical,
+.horizontal,
+.withHeader,
+.vertical [data-content-container],
+.horizontal [data-content-container],
+.withHeader [data-content-container]
+{
+	width: 100%;
+	height: 100%;
+}
+
+.vertical [data-content-container],
+.horizontal [data-content-container],
+.withHeader [data-content-container]
+{
+	overflow: auto;
+	display: block;
+}
+
+.vertical,
+.horizontal,
+.withHeader,
+.leftTop,
+.verticalWithHeader,
+.horizontalWithHeader,
+.headerContainer
+{
+	display: flex;
+}
+
+.vertical, .verticalWithHeader {
+	flex-direction: row;
+}
+  
+.horizontal, 
+.withHeader,
+.horizontalWithHeader
+{
+	flex-direction: column;
+}
+
+.verticalWithHeader,
+.horizontalWithHeader
+{
+	overflow: hidden;
+	flex-grow: 1;
+}
+
+.headerContainer {
+	align-items: center;
+}
+
+/* ------------------------------------------- */
+/* LeftTop Sizer Related
+/* ------------------------------------------- */
+
+.verticalWithHeader [data-left-top],
+.vertical [data-left-top]
+{
+	width: var(--size-left-top);	
+}
+
+.verticalWithHeader [data-right-bottom],
+.vertical [data-right-bottom]
+{
+	width: var(--size-right-bottom)
+}
+
+.horizontalWithHeader [data-left-top],
+.horizontal [data-left-top]
+{
+	height: var(--size-left-top);
+	width: 100%;
+}
+
+.horizontalWithHeader [data-right-bottom],
+.horizontal [data-right-bottom]
+{
+	height: var(--size-right-bottom);
+	width: 100%;
+}
+
+.vertical [data-gutter],
+.verticalWithHeader [data-gutter]
+{
+	width: var(--size-gutter);
+	height: 100%;
+	cursor: col-resize
+}
+
+.horizontal [data-gutter],
+.horizontalWithHeader [data-gutter]
+{
+	height: var(--size-gutter);
+	width: 100%;
+	cursor: row-resize
+}
+
+/* ------------------------------------------- */
+/* LeftTop RightBottom Generic
+/* ------------------------------------------- */
+
+.leftTop, .rightBottom {
+  overflow: auto;
+}
+
+.rightBottom {
+  flex-grow: 1;
+  position: relative;
+}
+
+/* ------------------------------------------- */
+/* Gutter Related
+/* ------------------------------------------- */
+.rightBottom[data-gutter-overlay="false"] {
+	display: flex;
+}
+
+.horizontal > div:first-child > div:last-child[data-right-bottom="true"][data-gutter-overlay="false"]
+{
+	flex-direction: column;
+}
+
+.rightBottom[data-gutter-overlay="true"] > div:last-child
+{
+	top: 0;
+	left: 0;
+  	position: absolute;
+}
+
+.gutter {
+  top: 0;
+  left: 0;
+  position: sticky;
+  z-index: 10;
+  overflow: hidden;
+  user-select: none;
+}
+
+.gutter::after{
+	content: ' ';
+}
+
+/*
+.gutter:hover {
+	opacity: var(--gutter-hover-opacity);
+	background-color: var(--gutter-hover-color);
+  	transition: all 0.4s ease-in;
+}
+*/
+
+/* ------------------------------------------- */
+/* Collapse Related
+/* ------------------------------------------- */
+.vertical[data-collapsed="true"] > div:first-child > div:last-child[data-right-bottom="true"] > div:first-child[data-gutter],
+.vertical[data-collapse] > div:first-child > div:last-child[data-right-bottom="true"] > div:first-child[data-gutter],
+.vertical[data-collapse="RightBottom"] > div:first-child > div:last-child[data-right-bottom="true"],
+.horizontal[data-collapsed="true"] > div:first-child > div:last-child[data-right-bottom="true"] > div:first-child[data-gutter],
+.horizontal[data-collapse] > div:first-child > div:last-child[data-right-bottom="true"] > div:first-child[data-gutter],
+.horizontal[data-collapse="RightBottom"] > div:first-child > div:last-child[data-right-bottom="true"],
+.withHeader[data-collapsed="true"] > div:last-child > div:last-child[data-right-bottom="true"] > div:first-child[data-gutter],
+.withHeader[data-collapse] > div:last-child > div:last-child[data-right-bottom="true"] > div:first-child[data-gutter],
+.withHeader[data-collapse="RightBottom"] > div:last-child > div:last-child[data-right-bottom="true"]
+{
+	display: none;
+}
+

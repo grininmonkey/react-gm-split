@@ -1,6 +1,7 @@
 html, body, #root {
-  height: 100%;
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -11,8 +12,27 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --color: #cbcbc2;
+  --color-section: #1b1d2a;
+  --color-content: #202231;
+  --color-border: #2f3646; 
+  --color-border-hover: #4997bc;  
+
+  color: var(--color);
+  background-color: var(--color-section);
+
 }
 
-#root {
-  display: grid;  
+[data-border]
+{
+  border: solid 0px var(--color-border);
+}
+
+[data-border="top"] {
+  border-top-width: 1px;
+}
+
+[data-border="left"] {
+  border-top-width: 1px;
 }

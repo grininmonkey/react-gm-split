@@ -1,114 +1,91 @@
-.main {
-    --color: #cbcbc2;
-    --color-section: #1b1d2a;
-    --color-content: #202231;
-    --color-border: #404757; 
-    --color-border-hover: #4997bc;
+
+[data-button] {
+    user-select: none;
+    cursor: pointer;
 }
 
-.main, .main > div:last-child {
-    display: grid;
+.header {
+    width: 100%;
+    display: flex;
+    padding: 5px 9px 5px 9px;
+    align-items: center;
 }
 
-.main {
-    grid-template-rows: 45px calc(100vh - 45px);
-    background-color: var(--color-content);
-    color: var(--color);
+.header > div:first-child {
+    padding:2px 0px 2px 0px;
+    font-size: 1.5rem;
+    user-select: none;
+    cursor: pointer;
 }
 
-.main > div:first-child,
-.main [data-split-gutter],
-.main [data-button],
-.main [data-border-left],
-.main [data-border-right],
-.main [data-border-top],
-.main [data-border-bottom]
+.header > div:last-child {
+    margin-left: auto;
+}
+
+.header > div:last-child span {
+    margin-left: 10px
+}
+
+.header [data-button],
+.content [data-button],
+.exampleContent [data-button]
 {
-    border: dashed 0px var(--color-border);
-}
-
-.main > div:first-child {
-    display: flex;
-    flex-direction: row;
-    /* justify-content: center; */
-    background-color: var(--color-section);
-    border-bottom-width: 1px;
-    user-select: none;
-}
-
-.main > div:first-child > div {
-    display: flex;
-    align-items: center;
-}
-
-.main > div:first-child > div:first-child {
-    font-size: 1.6rem;
-    margin-left: 10px;
-    margin-right:auto;
-}
-
-.main > div:first-child > div:last-child {
-    font-size: 1rem;
-    margin-right:10px;
-}
-
-.main > div:first-child > div:last-child > span {
-    margin-right: 10px;
-}
-
-.main [data-border-left="true"] {
-    border-left-width: 1px;
-}
-
-.main [data-border-right="true"] {
-    border-right-width: 1px;
-}
-
-.main [data-border-top="true"] {
-    border-top-width: 1px;
-}
-
-.main [data-border-bottom="true"] {
-    border-bottom-width: 1px;
-}
-
-.main [data-lots-padding="true"] {
-    padding: 20px;
-}
-
-.main [data-overflow="auto"] {
-    overflow: auto;
-    padding: 10px;
-}
-
-.main [data-button] {
-    display: flex;
-    user-select: none;
-    align-items: center;
-    border-width: 1px;
+    border: dashed 1px var(--color-border);
     border-radius: 4px;
-    justify-content: center;
-    padding: 4px;
+    padding: 2px 5px 2px 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-.main [data-button]:hover {
+.header [data-button]:hover, 
+.content [data-button]:hover,
+.exampleContent [data-button]:hover
+{
     border-color: var(--color-border-hover);
 }
 
-.main [data-bottom-margin] {
-    margin-bottom: 8px;
-}
-
-.main [data-section]
+.content
 {
-    background-color: var(--color-section);
+    width: 100%;
+    height: 100%;
 }
 
-.main [data-content] {
-    background-color: var(--color-content);
+.container [data-button]
+{
+    margin-bottom: 10px;
+    min-width: 80px;
 }
 
-.main [data-split-gutter]:hover {
-    background-color: var(--color-border-hover);
-    transition: all .6s ease-in 0s;
+.container {
+    display: block;
+    padding: 5px;
+}
+
+.menuContainer {
+    display: block;
+    padding: 5px;
+}
+
+.menuContainer [data-button]
+{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.someSpan {
+    padding-left: 6px;
+}
+
+.exampleContent{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.exampleContent [data-button]{
+    margin-top: 10px;
+    max-width: 80px
 }

@@ -1,54 +1,56 @@
 import React from 'react'
+import styles from './App.module.css'
+
 
 export default function Left ( props ) {
 
-    const [expanded, setExpanded] = React.useState(
-        props.splitProps && !props.splitProps.isCollapsed()
+    const split = props.splitProps
+
+    const [collapsed, setCollapsed] = React.useState(
+        split && split.isCollapsed()
     )
 
-    const [secondaryHidden, setSecondaryHidden] = React.useState(
-        props.splitProps && props.splitProps.isSecondaryHidden()
+    const [rightBottomHidden, setRightBottomHidden] = React.useState(
+        split && split.isRightBottomHidden()
     )
 
     const collapseToggle = () => {
-        props.splitProps.dispatch(
-            expanded ? "collapse" : "restore"
-        ) && setExpanded(
-            !expanded
+        split.dispatch(
+            !collapsed ? split.action.collapse : split.action.restore
+        ) && setCollapsed(
+            !collapsed
         )
     }
 
     const secondaryToggle = () => {
         props.splitProps.dispatch(
-            secondaryHidden ? "restore" : "hideSecondary"
-        ) && setSecondaryHidden(
-            !secondaryHidden
+            rightBottomHidden ? split.action.restore : split.action.hideRightBottom
+        ) && setRightBottomHidden(
+            !rightBottomHidden
         )
     }
 
     return (
-        <div data-overflow="auto" data-section data-border-right={expanded}>
-            {!secondaryHidden && (
-            <div 
-                data-button={true}
-                data-bottom-margin={true}
-                onClick={collapseToggle}
-            >
-                <span>
-                    {expanded ? "collapse" : ">"}
-                </span>
+        <div className={styles.content}>
+            <div className={styles.menuContainer}>
+                {!rightBottomHidden && (
+                <div 
+                    data-button={true}
+                    data-bottom-margin={true}
+                    onClick={collapseToggle}
+                >
+                    {collapsed ? ">" : "Collapse"}
+                </div>
+                )}
+                {!collapsed && (          
+                <div 
+                    data-button={true}
+                    onClick={secondaryToggle}
+                >
+                    {!rightBottomHidden ? "Hide Right" : "Restore"}
+                </div>
+                )}
             </div>
-            )}
-            { expanded && (
-            <div 
-                data-button={true}
-                onClick={secondaryToggle}
-            >
-                <span>
-                    {!secondaryHidden ? "hide secondary" : "restore"}
-                </span>
-            </div>
-            )}   
         </div>
     )
 
