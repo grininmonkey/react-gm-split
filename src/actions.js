@@ -20,8 +20,8 @@ const actionCollapse = (state) => {
     return true
 }
 //---------------------------------------------------------------
-//  Set SessionData and then update gridTemplate with
-//  0 sized target and gutter sections
+//  Set SessionData and data attribute along with
+//  client (width/height) value to in effect hide target
 //---------------------------------------------------------------
 const actionHide = (state, child) => {
     if (getSessionData(state)[child+str.state]) {
@@ -42,9 +42,7 @@ const actionHide = (state, child) => {
     return true
 }
 //---------------------------------------------------------------
-//  Update gridTemplate with stored session of last snapshot
-//  when all sections have values or restore as collapsed
-//  if primary was hidden after a collapse state.
+//  Restore client (width/height) and or reset to collapsed
 //---------------------------------------------------------------
 const actionRestore = (state) => {
     const session = getSessionData(state)
