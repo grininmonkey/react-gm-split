@@ -23,7 +23,7 @@ const App = () => {
       gutterOverlay={true}
       gutterHoverStyle={{
         opacity: ".6",
-        backgroundColor: "var(--gutter-hover-color)",
+        backgroundColor: "var(--split-gutter-hover-color)",
         transition: "all 0.4s ease-in"
       }}
       collapsedSize={50}

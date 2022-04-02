@@ -2,9 +2,6 @@
 
 [![NPM](https://img.shields.io/npm/v/react-gm-split.svg)](https://www.npmjs.com/package/react-gm-split) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-> <b>Work in Progress!</b> 
-
->I have refactored the component to use flex which is a "bit" more consistant between various browsers in terms of targeted behavior from using this component perspective (imo). I have also attempted to run thru and make sure it mostly/sorta/kinda works with IE... in case, need to test some.
 
 > Here is a codesandbox [Demo](https://codesandbox.io/s/reac-gm-split-example-1uoiz?file=/src/App.js)
 

@@ -1,9 +1,14 @@
 import React from "react";
-import { str, axis, dataKey } from "./config";
-import { getSessionData, updateSessionData } from "./session";
-import { 
-    getElementReferences, getPercentFromPointer, inBounds 
-} from "./helpers";
+import {
+    str,
+    axis,
+    dataKey,
+    inBounds,
+    getSessionData, 
+    updateSessionData,
+    getElementReferences,
+    getPercentFromPointer
+} from '../js'
 
 export default function Gutter ( state ) {
     const thisAxis  = axis[state.as]

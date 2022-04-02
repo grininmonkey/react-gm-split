@@ -10,10 +10,10 @@
 .horizontal,
 .withHeader
 {
-	--size-left-top: 50%;
+	--split-size-left-top: 50%;
 	--size-right-bottom: 0;
-	--size-gutter: 7px;
-	--gutter-hover-color: #4b5162; 
+	--split-size-gutter: var(--gm-split-size-gutter, 27px);
+	--split-gutter-hover-color: var(--gm-split-gutter-hover-color, #4b5162); 
 	--gutter-hover-opacity: .6;
 }
 
@@ -76,7 +76,7 @@
 .verticalWithHeader [data-left-top],
 .vertical [data-left-top]
 {
-	width: var(--size-left-top);	
+	width: var(--split-size-left-top);	
 }
 
 .verticalWithHeader [data-right-bottom],
@@ -88,7 +88,7 @@
 .horizontalWithHeader [data-left-top],
 .horizontal [data-left-top]
 {
-	height: var(--size-left-top);
+	height: var(--split-size-left-top);
 	width: 100%;
 }
 
@@ -102,7 +102,7 @@
 .vertical [data-gutter],
 .verticalWithHeader [data-gutter]
 {
-	width: var(--size-gutter);
+	width: var(--split-size-gutter);
 	height: 100%;
 	cursor: col-resize
 }
@@ -110,7 +110,7 @@
 .horizontal [data-gutter],
 .horizontalWithHeader [data-gutter]
 {
-	height: var(--size-gutter);
+	height: var(--split-size-gutter);
 	width: 100%;
 	cursor: row-resize
 }
@@ -163,7 +163,7 @@
 /*
 .gutter:hover {
 	opacity: var(--gutter-hover-opacity);
-	background-color: var(--gutter-hover-color);
+	background-color: var(--split-gutter-hover-color);
   	transition: all 0.4s ease-in;
 }
 */

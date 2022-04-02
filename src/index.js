@@ -1,16 +1,23 @@
 import React from "react"
-import { 
-    renderMode, containerStyle,
-    childrenCount, childPassProps,
-    childrenObjects, splitContainerClass, 
-    initialDataProps, dataProps, propsChanged 
-} from "./helpers"
-import { splitPropTypes, str, actions } from "./config"
-import { getSessionData } from "./session"
-import initialState from "./initialState"
-import splitAction from "./actions"
-import Gutter from "./Gutter"
-import styles from "./split.module.css"
+import Gutter from "./components/Gutter"
+import styles from "./css/split.module.css"
+import {
+    str,
+    actions, 
+    dataProps,
+    renderMode, 
+    splitAction, 
+    initialState,
+    propsChanged,
+    childrenCount,
+    getSessionData, 
+    containerStyle,
+    childPassProps,
+    splitPropTypes,
+    childrenObjects, 
+    initialDataProps, 
+    splitContainerClass,
+} from './js'
 
 const Split = ( props ) => {
     //---------------------------------------------------------------

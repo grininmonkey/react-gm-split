@@ -1,7 +1,7 @@
 {
   "name": "react-gm-split",
-  "version": "1.1.1",
-  "description": "Split component using CSS flex",
+  "version": "1.1.2",
+  "description": "Split component",
   "author": "grininmonkey",
   "license": "MIT",
   "repository": "grininmonkey/react-gm-split",
@@ -25,7 +25,7 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0 || ^17.0.0"
+    "react": "^16.0.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "microbundle-crl": "^0.13.10",
