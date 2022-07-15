@@ -29,7 +29,9 @@ declare module 'react-gm-split' {
 		initialLeftTopState?: boolean,
 		initialCollapsedState?: boolean
 		rightBottomBackground?: string,
+		leftTopOverflowHidden?: boolean,
 		initialRightBottomState?: boolean,
+		rightBottomOverflowHidden?: boolean
 		props?: any
 	}
 

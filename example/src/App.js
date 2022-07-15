@@ -37,6 +37,7 @@ const App = () => {
       initialCollapsedState={false}
       rightBottomBackground="var(--color-content)"
       initialRightBottomState={false}
+      rightBottomOverflowHidden={true}
     >
       {exampleNumber <  3 && (
         <Header {...{

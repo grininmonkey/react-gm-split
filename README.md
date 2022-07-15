@@ -69,7 +69,9 @@ Review the example(s) for a better sense of how to use the component.
 - `initialLeftTopState: boolean (default:true)`
 - `initialCollapsedState: boolean (default:false)`
 - `rightBottomBackground: string`
+- `leftTopOverflowHidden: boolean`
 - `initialRightBottomState: boolean (default:true)`
+- `rightBottomOverflowHidden: boolean`
 
 ### `Size` related properties
 

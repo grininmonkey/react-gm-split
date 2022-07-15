@@ -91,7 +91,9 @@ const splitPropTypes = {
     initialLeftTopState: PropTypes.bool,
     initialCollapsedState: PropTypes.bool,
     rightBottomBackground: PropTypes.string,
-    initialRightBottomState: PropTypes.bool
+    leftTopOverflowHidden: PropTypes.bool,
+    initialRightBottomState: PropTypes.bool,
+    rightBottomOverflowHidden: PropTypes.bool
 }
 
 export {
