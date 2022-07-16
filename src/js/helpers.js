@@ -166,8 +166,7 @@ const initialStateSize = (state) => {
 //  LeftTop or RightBottom container inline style  
 //---------------------------------------------------------------
 const containerStyle = (state, leftTop) => {
-
-    const session = getSessionData(state)
+    // const session = getSessionData(state)
     const client = axis[state.as].client 
     let style = {}
     if (leftTop){
@@ -183,7 +182,6 @@ const containerStyle = (state, leftTop) => {
         if (state.rightBottomOverflowHidden === true)
             style.overflow = str.hidden
     }
-    console.log(style, state.rightBottomOverflowHidden)
     return style
 }
 //---------------------------------------------------------------
