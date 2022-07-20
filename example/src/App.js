@@ -29,6 +29,7 @@ const App = () => {
       collapsedSize={50}
       leftTopMinSize={5}
       leftTopMaxSize={95}
+      containerAttributes={[{container:'leftTop',name:"data-my-attr",value:true}]}
       leftTopBackground="var(--color-section)"
       firstChildIsHeader={exampleNumber < 3}
       collapseTransition={true}

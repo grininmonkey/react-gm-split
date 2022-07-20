@@ -70,6 +70,12 @@ Review the example(s) for a better sense of how to use the component.
 - `initialCollapsedState: boolean (default:false)`
 - `rightBottomBackground: string`
 - `leftTopOverflowHidden: boolean`
+- `containerAttributes: containerAttribute[]`
+  * {
+    container: 'header' | 'leftTop' | 'rightBottom' | 'nonSplit',
+    name: string,
+    value: any
+  }
 - `initialRightBottomState: boolean (default:true)`
 - `rightBottomOverflowHidden: boolean`
 

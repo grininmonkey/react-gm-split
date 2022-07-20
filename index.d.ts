@@ -2,8 +2,15 @@ declare module 'react-gm-split' {
 
 	import React from 'react';
 
+	export type Container = 'header' | 'leftTop' | 'rightBottom' | 'nonSplit'
 	export type splitAs  = 'vertical' | 'horizontal';
 	export type Size = string | number
+
+	interface containerAttribute {
+		container?: Container,
+		attribute?: string,
+		value?: any
+	}
 
 	interface ReactGMSplitProps {
 		id?: string | number,
@@ -26,6 +33,7 @@ declare module 'react-gm-split' {
 		collapseTransition?: boolean,
 		/**  value as Percent */
 		initialLeftTopSize?: Size,
+		containerAttributes?: containerAttribute[],
 		initialLeftTopState?: boolean,
 		initialCollapsedState?: boolean
 		rightBottomBackground?: string,

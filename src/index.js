@@ -15,7 +15,8 @@ import {
     childPassProps,
     splitPropTypes,
     childrenObjects, 
-    initialDataProps, 
+    initialDataProps,
+    containerAttributes, 
     splitContainerClass,
 } from './js'
 
@@ -71,6 +72,8 @@ const Split = ( props ) => {
                childCount
            })
     }
+
+    console.log(state)
     //---------------------------------------------------------------
     //  Get valid React Elements from Children and render
     //---------------------------------------------------------------
@@ -88,6 +91,7 @@ const Split = ( props ) => {
                 <div 
                     className={styles.headerContainer}
                     data-header-content-container
+                    {...containerAttributes(state,'header')}
                 >
                     {React.cloneElement(
                         element[0],
@@ -107,6 +111,7 @@ const Split = ( props ) => {
                     className={styles.leftTop}
                     data-content-container
                     data-left-top
+                    {...containerAttributes(state,'leftTop')}
                 >
                     {React.cloneElement(
                         element[0 + renderType],
@@ -125,6 +130,7 @@ const Split = ( props ) => {
                     <div 
                         style={containerStyle(state)}
                         data-content-container
+                        {...containerAttributes(state,'rightBottom')}
                     >
                         {React.cloneElement(
                             element[1 + renderType],
@@ -137,6 +143,7 @@ const Split = ( props ) => {
             <div data-content-container>
                 <div 
                     data-non-split-content
+                    {...containerAttributes(state,'nonSplit')}
                     style={{height:"inherit",width:"inherit"}}
                 >
                     {props.children}

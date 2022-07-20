@@ -88,6 +88,7 @@ const splitPropTypes = {
         PropTypes.string,
         PropTypes.number
     ]),
+    containerAttributes: PropTypes.array,
     initialLeftTopState: PropTypes.bool,
     initialCollapsedState: PropTypes.bool,
     rightBottomBackground: PropTypes.string,

@@ -37,3 +37,6 @@ export {
     getSessionData,
     updateSessionData
 } from './session'
+export {
+    default as containerAttributes
+} from './containerAttributes'
