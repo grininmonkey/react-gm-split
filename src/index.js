@@ -72,8 +72,6 @@ const Split = ( props ) => {
                childCount
            })
     }
-
-    console.log(state)
     //---------------------------------------------------------------
     //  Get valid React Elements from Children and render
     //---------------------------------------------------------------
