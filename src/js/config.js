@@ -40,7 +40,7 @@ const str = {
     percent      : "%",
     function     : "function",
     vertical     : Object.keys(axis)[0],
-    animation    : "all 0.2s ease-out",
+    animation    : "width 0.2s ease-out",
     collapsed    : "collapsed",
     undefined    : "undefined",
     horizontal   : Object.keys(axis)[1],
